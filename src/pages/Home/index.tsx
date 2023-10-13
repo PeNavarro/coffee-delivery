@@ -1,7 +1,9 @@
-import { Header } from '../../components/Header/index.tsx'
+import { HomeContainer } from './styles.ts'
 
 export function Home(){
     return (
-        <Header/>
+        <HomeContainer>
+
+        </HomeContainer>
     )
 }
