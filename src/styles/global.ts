@@ -10,4 +10,9 @@ export const GlobalStyle = createGlobalStyle`
     body{
         background-color: ${(props) => props.theme['background']};
     }
+
+    #root{
+        max-width: 1120px;
+        margin: 0 auto;
+    }
 `
