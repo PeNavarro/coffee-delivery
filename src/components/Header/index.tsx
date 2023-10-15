@@ -1,4 +1,4 @@
-import { HeaderContainer } from "./style"
+import { HeaderContainer } from "./styles"
 import logo from '../../assets/Logo.svg'
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 
