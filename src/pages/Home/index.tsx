@@ -10,12 +10,12 @@ export function Home(){
     const [ coffeeList, setCoffeeList ] = useState<CoffeeInterface[]>([])
 
     useEffect(() => {
-        localStorage.setItem('@coffee-delivery:coffee-list-1.0.0', JSON.stringify(coffeeListData))
+        if(!localStorage.getItem('@coffee-delivery:coffee-list-1.0.0')){
+            localStorage.setItem('@coffee-delivery:coffee-list-1.0.0', JSON.stringify(coffeeListData))
+        }else{
+            const storedCoffeeList = localStorage.getItem('@coffee-delivery:coffee-list-1.0.0')
 
-        const storedCoffeeList = localStorage.getItem('@coffee-delivery:coffee-list-1.0.0')
-
-        if(storedCoffeeList){
-            setCoffeeList(JSON.parse(storedCoffeeList))
+            setCoffeeList(JSON.parse(storedCoffeeList!))
         }
 
     }, [coffeeListData])
@@ -67,16 +67,22 @@ export function Home(){
             <CoffeList>
                 <h2>Nossos cafés</h2>
 
-                {coffeeList.map((coffee) => {
-                    return(
-                        <div key={coffee.id}>
-                            <CoffeeCard
-                                id={coffee.id}
-                                name={coffee.name} 
-                            />
-                        </div>
-                    )
-                })}
+                <div className="coffeeGrid">
+                    {coffeeList.map((coffee) => {
+                        return(
+                            <div key={coffee.id}>
+                                <CoffeeCard
+                                    id={coffee.id}
+                                    name={coffee.name} 
+                                    image={coffee.image}
+                                    categories={coffee.categories}
+                                    description={coffee.description}
+                                    price={coffee.price}
+                                />
+                            </div>
+                        )
+                    })}
+                    </div>
             </CoffeList>
         </HomeContainer>
     )

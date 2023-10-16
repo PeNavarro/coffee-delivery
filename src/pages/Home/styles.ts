@@ -90,13 +90,14 @@ export const Background = styled.div`
     position: absolute;
     width: 100vw;
     height: 100%;
-    left: 0;
+    left: calc((100vw - 1120px)/2*-1);
     z-index: -1;
 
     img{
         width: 100%;
         height: 100%;
         object-fit: cover;
+        left: 0;
     }
 `
 
@@ -108,5 +109,13 @@ export const CoffeList = styled.section`
         font-style: normal;
         font-weight: 800;
         line-height: 130%; /* 41.6px */
+        margin-bottom: 54px;
+    }
+
+    .coffeeGrid{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 32px;
+        row-gap: 40px;
     }
 `
