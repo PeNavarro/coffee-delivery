@@ -90,7 +90,7 @@ export const Background = styled.div`
     position: absolute;
     width: 100vw;
     height: 100%;
-    left: calc((100vw - 1120px)/2*-1);
+    left: calc((100vw - 1103px)/2*-1);
     z-index: -1;
 
     img{

@@ -17,11 +17,15 @@ export function CoffeeCard({name, image, categories, description, price}: Coffee
 
     function handleIncreaseButton(){
         const newCoffeeQuantity = coffeeQuantity + 1
-        setCoffeQuantity(newCoffeeQuantity)
+
+        if(newCoffeeQuantity <= 99){
+            setCoffeQuantity(newCoffeeQuantity)
+        }
     }
 
     function handleDecreaseButton(){
         const newCoffeeQuantity = coffeeQuantity - 1
+
         if(newCoffeeQuantity >= 0){
             setCoffeQuantity(newCoffeeQuantity)
         }
