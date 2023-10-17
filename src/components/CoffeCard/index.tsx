@@ -31,6 +31,10 @@ export function CoffeeCard({name, image, categories, description, price}: Coffee
         }
     }
 
+    function handleAddToCart(){
+        console.log(name, image, categories, description, price)
+    }
+
     return(
         <CoffeeCardContainer>
             <img src={image} alt={`Imagem café ${name}`} />
@@ -58,7 +62,7 @@ export function CoffeeCard({name, image, categories, description, price}: Coffee
                         </button>
                     </div>
 
-                    <button className='cartButton'>
+                    <button className='cartButton' onClick={handleAddToCart}>
                         <ShoppingCart weight='fill' width={22} color='#F3F2F2' />
                     </button>
                 </div>
