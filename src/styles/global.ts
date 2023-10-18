@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
-    body{
+    body, button{
         background-color: ${(props) => props.theme['background']};
         font-family: 'Roboto', sans-serif;
     }

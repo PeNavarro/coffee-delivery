@@ -1,6 +1,7 @@
 import { Minus, Plus, ShoppingCart } from '@phosphor-icons/react'
 import { CoffeeCardContainer } from './styles.ts'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from '../../contexts/CartContext.tsx'
 
 export interface CoffeeInterface{
     id: string,
@@ -11,7 +12,13 @@ export interface CoffeeInterface{
     price: number
 }
 
-export function CoffeeCard({name, image, categories, description, price}: CoffeeInterface){
+export interface CoffeeCardInterface{
+    coffee: CoffeeInterface
+}
+
+export function CoffeeCard({coffee}: CoffeeCardInterface){
+    const { addCoffeeToCart } = useContext(CartContext)
+
     const [coffeeQuantity, setCoffeQuantity] = useState(0)
 
 
@@ -32,24 +39,25 @@ export function CoffeeCard({name, image, categories, description, price}: Coffee
     }
 
     function handleAddToCart(){
-        console.log(name, image, categories, description, price)
+        const coffeesToCart = {coffee, coffeeQuantity}
+        addCoffeeToCart(coffeesToCart)
     }
 
     return(
         <CoffeeCardContainer>
-            <img src={image} alt={`Imagem café ${name}`} />
+            <img src={coffee.image} alt={`Imagem café ${name}`} />
             <div className="categories">
-                {categories.map((category) => {
+                {coffee.categories.map((category) => {
                     return(
                         <span key={category}>{category}</span>
                     )
                 })}
             </div>
-            <h3>{name}</h3>
-            <p className='description'>{description}</p>
+            <h3>{coffee.name}</h3>
+            <p className='description'>{coffee.description}</p>
 
             <div className='buy'>
-                <p className='price'>R$ <span>{price.toFixed(2).toString().replace(".", ",")}</span></p>
+                <p className='price'>R$ <span>{coffee.price.toFixed(2).toString().replace(".", ",")}</span></p>
 
                 <div className="actions">
                     <div className="counter">

@@ -18,7 +18,7 @@ export function Home(){
             setCoffeeList(JSON.parse(storedCoffeeList!))
         }
 
-    }, [coffeeListData])
+    }, [])
 
     return (
         <HomeContainer>
@@ -72,12 +72,7 @@ export function Home(){
                         return(
                             <div key={coffee.id}>
                                 <CoffeeCard
-                                    id={coffee.id}
-                                    name={coffee.name} 
-                                    image={coffee.image}
-                                    categories={coffee.categories}
-                                    description={coffee.description}
-                                    price={coffee.price}
+                                    coffee={coffee}
                                 />
                             </div>
                         )

@@ -29,5 +29,29 @@ export const HeaderContainer = styled.header`
 
         display: flex;
         align-items: center;
+
+        position: relative;
+
+        span{
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 2px;
+            right: -50%;
+
+            padding: 2px;
+            border-radius: 100%;
+            min-width: 20px;
+            width: fit-content;
+            height: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: ${props => props.theme['yellow-dark']};
+            color: ${props => props.theme['white']};
+            font-size: 12px;
+            font-weight: 700;
+        }
     }
 `
