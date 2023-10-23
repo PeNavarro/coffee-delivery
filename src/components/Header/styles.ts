@@ -21,37 +21,42 @@ export const HeaderContainer = styled.header`
         color: ${props => props.theme['purple-dark']};
     }
 
-    .cart{
-        background-color: ${props => props.theme['yellow-light']};
-        padding: 8px;
-        border-radius: 6px; 
-        border: none;
-
+    .cartLink{
         display: flex;
-        align-items: center;
 
-        position: relative;
-
-        span{
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 2px;
-            right: -50%;
-
-            padding: 2px;
-            border-radius: 100%;
-            min-width: 20px;
-            width: fit-content;
-            height: 20px;
+        .cart{
+            background-color: ${props => props.theme['yellow-light']};
+            padding: 8px;
+            border-radius: 6px; 
+            border: none;
 
             display: flex;
             align-items: center;
-            justify-content: center;
 
-            background-color: ${props => props.theme['yellow-dark']};
-            color: ${props => props.theme['white']};
-            font-size: 12px;
-            font-weight: 700;
+            position: relative;
+            cursor: pointer;
+
+            span{
+                position: absolute;
+                transform: translate(-50%, -50%);
+                top: 2px;
+                right: -50%;
+
+                padding: 2px;
+                border-radius: 100%;
+                min-width: 20px;
+                width: fit-content;
+                height: 20px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background-color: ${props => props.theme['yellow-dark']};
+                color: ${props => props.theme['white']};
+                font-size: 12px;
+                font-weight: 700;
+            }
         }
     }
 `
