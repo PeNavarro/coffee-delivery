@@ -18,11 +18,17 @@ interface CartContextProviderProps{
 export const CartContext = createContext({} as CartContext)
 
 export function CartContextProvider({children}: CartContextProviderProps){
-    const [ coffeeCart, setCoffeeCart ] = useState<AddCoffeeToCart[]>([])
+    const [ coffeeCart, setCoffeeCart ] = useState<AddCoffeeToCart[]>(() => {
+        if(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')){
+            return JSON.parse(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')!)
+        }
+        return []
+    })
 
     function addCoffeeToCart(coffeeToCart: AddCoffeeToCart){
         if(coffeeToCart.coffeeQuantity > 0){
             setCoffeeCart([...coffeeCart, coffeeToCart])
+            
             localStorage.setItem('@coffee-delivery:coffee-cart-1.0.0', JSON.stringify(coffeeCart))
         }
     }
