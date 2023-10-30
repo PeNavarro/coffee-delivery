@@ -92,6 +92,7 @@ export const CartCoffeeCardContainer = styled.div`
                 font-size: 12px;
                 color: ${props => props.theme['base-text']};
 
+                cursor: pointer;
                 svg{
                     flex-shrink: 0;
                 }
@@ -100,21 +101,14 @@ export const CartCoffeeCardContainer = styled.div`
     }
         
     .price{
-        font-size: 14px;
+        font-size: 16px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 700;
         line-height: 130%; /* 18.2px */
         color: ${props => props.theme['base-text']};
 
         display: flex;
         align-items: flex-end;
         gap: 4px;
-
-        span{
-            font-family: 'Baloo 2', sans-serif;
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 800;
-        }
     }  
 `

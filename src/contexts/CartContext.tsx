@@ -1,14 +1,16 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { CoffeeInterface } from '../components/CoffeCard/index.tsx'
 
-interface AddCoffeeToCart{
+interface CoffeeInCart{
     coffee: CoffeeInterface,
     coffeeQuantity: number
 }
 
 interface CartContext{
-    coffeeCart: AddCoffeeToCart[],
-    addCoffeeToCart: (coffee: AddCoffeeToCart) => void
+    coffeeCart: CoffeeInCart[],
+    addCoffeeToCart: (coffee: CoffeeInCart) => void,
+    updateCoffeeCartQuantity: (coffeeId: string, coffeeQuantity: number) => void,
+    removeCoffeeFromCart: (coffeeId: string) => void
 }  
 
 interface CartContextProviderProps{
@@ -18,23 +20,46 @@ interface CartContextProviderProps{
 export const CartContext = createContext({} as CartContext)
 
 export function CartContextProvider({children}: CartContextProviderProps){
-    const [ coffeeCart, setCoffeeCart ] = useState<AddCoffeeToCart[]>(() => {
+    const [ coffeeCart, setCoffeeCart ] = useState<CoffeeInCart[]>(() => {
+
         if(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')){
             return JSON.parse(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')!)
         }
         return []
     })
 
-    function addCoffeeToCart(coffeeToCart: AddCoffeeToCart){
+    useEffect(() => {
+        localStorage.setItem('@coffee-delivery:coffee-cart-1.0.0', JSON.stringify(coffeeCart))
+    }, [coffeeCart])
+
+    function addCoffeeToCart(coffeeToCart: CoffeeInCart){
         if(coffeeToCart.coffeeQuantity > 0){
-            setCoffeeCart([...coffeeCart, coffeeToCart])
-            
-            localStorage.setItem('@coffee-delivery:coffee-cart-1.0.0', JSON.stringify(coffeeCart))
+            setCoffeeCart([...coffeeCart, coffeeToCart])         
         }
     }
 
+    function updateCoffeeCartQuantity(coffeeId: string, newCoffeeQuantity: number){
+        if(newCoffeeQuantity > 0){
+            const cartWithQuantityChanged = coffeeCart.map(coffee => {
+                if(coffeeId === coffee.coffee.id){
+                    return {...coffee, coffeeQuantity: newCoffeeQuantity}
+                }
+
+                return coffee
+            })
+
+            setCoffeeCart(cartWithQuantityChanged)
+        }
+    }
+
+    function removeCoffeeFromCart(coffeeId: string){
+        const cartWithCoffeeRemoved = coffeeCart.filter((coffee) => coffee.coffee.id !== coffeeId)
+
+        setCoffeeCart(cartWithCoffeeRemoved)
+    }
+
     return(
-        <CartContext.Provider value={{coffeeCart, addCoffeeToCart}}>
+        <CartContext.Provider value={{coffeeCart, addCoffeeToCart, updateCoffeeCartQuantity, removeCoffeeFromCart}}>
             {children}
         </CartContext.Provider>
     )

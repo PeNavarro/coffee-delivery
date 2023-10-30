@@ -1,10 +1,22 @@
 import { useContext } from "react";
 import { CheckoutContainer, OrderData, CartData, FormContainer, BoxContainer, PaymentOptions, CartBox } from "./styles";
 import { CartContext } from "../../contexts/CartContext";
-import { CartCoffeCard } from "../../components/CartCoffeCard";
+import { CartCoffeeCard, CoffeeCardInterface } from "../../components/CartCoffeeCard";
 
 export function Checkout(){
     const { coffeeCart } = useContext(CartContext)
+
+    function totalCoffeesPrice(){
+        var totalCoffeesPrice = 0
+
+        coffeeCart.forEach((coffee: CoffeeCardInterface) => {
+            totalCoffeesPrice += coffee.coffee.price * coffee.coffeeQuantity
+       })
+
+       var totalCoffeesPriceFormatted = totalCoffeesPrice.toFixed(2).toString().replace(".", ",")
+
+       return totalCoffeesPriceFormatted
+    }
 
     return(
         <CheckoutContainer>
@@ -94,9 +106,32 @@ export function Checkout(){
                 <h2>Cafés selecionados</h2>
 
                 <CartBox>
-                    {coffeeCart.map((coffee) => {
-                        return <CartCoffeCard coffee={coffee.coffee} coffeeQuantity={coffee.coffeeQuantity} />
-                    })}
+                    {coffeeCart.length > 0 ?
+                        coffeeCart.map((coffee) => {
+                            return <CartCoffeeCard key={coffee.coffee.id} coffee={coffee.coffee} coffeeQuantity={coffee.coffeeQuantity} />
+                        })
+                    :
+                        <p className="emptyCartText">Nenhum café adicionado ao carrinho</p>
+                    }
+
+                    <div className="prices">
+                        <div className="price">
+                            <p>Total de itens</p>
+                            <p>R$ {totalCoffeesPrice()}</p>
+                        </div>
+
+                        <div className="price">
+                            <p>Entrega</p>
+                            <p>R$ 3,50</p>
+                        </div>
+
+                        <div className="total">
+                            <p>Total</p>
+                            <p>R$ 33,20</p>
+                        </div>
+                    </div>
+
+                    <button className="confirmOrder">confirmar pedido</button>
                 </CartBox>
             </CartData>
         </CheckoutContainer>

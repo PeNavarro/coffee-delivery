@@ -157,9 +157,57 @@ export const PaymentOptions = styled.div`
 
 export const CartBox = styled.div`
     padding: 40px;
+    display: flex;
     flex-direction: column;
     gap: 24px;
     border-radius: 6px 44px;
     background-color: ${props => props.theme['base-card']};
     margin-top: 15px;
+
+    .emptyCartText{
+        text-align: center;
+        color: ${props => props.theme['base-text']};
+        margin-bottom: 30px;
+    }
+
+    .prices{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .price{
+            display: flex;
+            justify-content: space-between;
+            color: ${props => props.theme['base-text']};
+        }
+
+        .total{
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            color: ${props => props.theme['base-subtitle']};
+        }
+    }
+
+    .confirmOrder{
+        width: 100%;
+        padding: 12px 8px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background-color: ${props => props.theme['yellow']};
+
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: ${props => props.theme['white']};
+
+        transition: all 200ms ease-in-out;
+
+        &:hover{
+            background-color: ${props => props.theme['yellow-dark']};
+        }
+    }
 `
