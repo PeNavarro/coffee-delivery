@@ -1,10 +1,24 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { CheckoutContainer, OrderData, CartData, FormContainer, BoxContainer, PaymentOptions, CartBox } from "./styles";
 import { CartContext } from "../../contexts/CartContext";
 import { CartCoffeeCard, CoffeeCardInterface } from "../../components/CartCoffeeCard";
 
+interface CepData{
+    cep: string,
+    state: string,
+    city: string,
+    neighborhood: string,
+    street: string
+}
+
 export function Checkout(){
     const { coffeeCart } = useContext(CartContext)
+    const [ streetForm, setStreetForm ] = useState('')
+    const [ numberForm, setNumberForm ] = useState('')
+    const [ complementForm, setComplementForm ] = useState('')
+    const [ neighborhoodForm, setNeighborhoodForm ] = useState('')
+    const [ cityForm, setCityForm ] = useState('')
+    const [ stateForm, setStateForm ] = useState('')
 
     function totalCoffeesPrice(){
         var totalCoffeesPrice = 0
@@ -16,6 +30,22 @@ export function Checkout(){
        var totalCoffeesPriceFormatted = totalCoffeesPrice.toFixed(2).toString().replace(".", ",")
 
        return totalCoffeesPriceFormatted
+    }
+
+    function getAddressFromCep(event: ChangeEvent<HTMLInputElement>){
+        if(event.target.value.length >= 8){
+            fetch(`https://brasilapi.com.br/api/cep/v1/${event.target.value}`)
+            .then(response => response.json())
+            .then((data: CepData) => {
+                setStreetForm(data.street)
+                setNeighborhoodForm(data.neighborhood)
+                setCityForm(data.city)
+                setStateForm(data.state)
+            })
+            .catch(error => {
+                console.error('Ocorreu um erro ao tentar buscar o CEP :( \n\n'+error)
+            })
+        }
     }
 
     return(
@@ -38,21 +68,21 @@ export function Checkout(){
 
                     <form>
                         <FormContainer>
-                            <input type="text" name="zip" id="zip" placeholder="CEP" required/>
+                            <input type="text" name="zip" id="zip" placeholder="CEP" onChange={(e) => getAddressFromCep(e)} maxLength={9} required/>
 
-                            <input type="text" name="street" id="street" placeholder="Rua" required/>
+                            <input type="text" name="street" id="street" placeholder="Rua" onChange={(e) => setStreetForm(e.target.value)} value={streetForm} required/>
 
                             <div>
-                                <input type="text" name="number" id="number" placeholder="Número" required/>
+                                <input type="text" name="number" id="number" placeholder="Número" onChange={(e) => setNumberForm(e.target.value)} value={numberForm} required/>
 
-                                <input className="inputWithHelperText" type="text" name="complement" id="complement" placeholder="Complemento" required/>
+                                <input className="inputWithHelperText" type="text" name="complement" id="complement" placeholder="Complemento" onChange={(e) => setComplementForm(e.target.value)} value={complementForm} required/>
                                 <input className="helperText" type="text" value="Opcional" disabled/>
                             </div>
 
                             <div>
-                                <input type="text" name="neighborhood" id="neighborhood" placeholder="Bairro" required/>
-                                <input type="text" name="city" id="city" placeholder="Cidade" required/>
-                                <input className="stateInput" type="text" name="state" id="state" placeholder="UF" required/>
+                                <input type="text" name="neighborhood" id="neighborhood" placeholder="Bairro" onChange={(e) => setNeighborhoodForm(e.target.value)}  value={neighborhoodForm} required/>
+                                <input type="text" name="city" id="city" placeholder="Cidade" value={cityForm} onChange={(e) => setCityForm(e.target.value)}  required/>
+                                <input className="stateInput" type="text" name="state" id="state" placeholder="UF" onChange={(e) => setStateForm(e.target.value)}  value={stateForm} required/>
                             </div>
                         </FormContainer>
                     </form>
