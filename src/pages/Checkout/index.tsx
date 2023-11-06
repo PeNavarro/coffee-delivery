@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { CheckoutContainer, OrderData, CartData, FormContainer, BoxContainer, PaymentOptions, CartBox } from "./styles";
 import { CartContext } from "../../contexts/CartContext";
 import { CartCoffeeCard, CoffeeCardInterface } from "../../components/CartCoffeeCard";
@@ -20,17 +20,17 @@ export function Checkout(){
     const [ cityForm, setCityForm ] = useState('')
     const [ stateForm, setStateForm ] = useState('')
 
-    function totalCoffeesPrice(){
-        var totalCoffeesPrice = 0
+    const [ totalCoffeesPrice, setTotalCoffeesPrice ] = useState(0)
+    
+    useEffect(() => {
+        const allCoffeesPrice = coffeeCart.reduce((totalPrice, coffee) => {
+            return totalPrice + coffee.coffee.price * coffee.coffeeQuantity;
+        }, 0);
 
-        coffeeCart.forEach((coffee: CoffeeCardInterface) => {
-            totalCoffeesPrice += coffee.coffee.price * coffee.coffeeQuantity
-       })
+        console.log(allCoffeesPrice)
+    }, [coffeeCart])    
 
-       var totalCoffeesPriceFormatted = totalCoffeesPrice.toFixed(2).toString().replace(".", ",")
-
-       return totalCoffeesPriceFormatted
-    }
+    // var totalCoffeesPriceFormatted = totalCoffeesPrice.toFixed(2).toString().replace(".", ",")
 
     function getAddressFromCep(event: ChangeEvent<HTMLInputElement>){
         if(event.target.value.length >= 8){
@@ -147,7 +147,7 @@ export function Checkout(){
                     <div className="prices">
                         <div className="price">
                             <p>Total de itens</p>
-                            <p>R$ {totalCoffeesPrice()}</p>
+                            <p>R$ {totalCoffeesPrice}</p>
                         </div>
 
                         <div className="price">
