@@ -22,22 +22,26 @@ export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
     
     const [ cartCoffeeQuantity, setCartCoffeQuantity] = useState(coffeeQuantity)
 
-    const totalPrice = coffee.price * coffeeQuantity;
+    // const totalPrice = coffee.price * cartCoffeeQuantity;
 
 
     function handleIncreaseButton(){
         if(cartCoffeeQuantity < 99){
-            setCartCoffeQuantity(cartCoffeeQuantity+1)
+            const newCoffeeQuantity = cartCoffeeQuantity+1
 
-            updateCoffeeCartQuantity(coffee.id, cartCoffeeQuantity)
+            setCartCoffeQuantity(newCoffeeQuantity)
+
+            updateCoffeeCartQuantity(coffee.id, newCoffeeQuantity)
         }
     }
 
     function handleDecreaseButton(){
-        if(cartCoffeeQuantity > 0){
-            setCartCoffeQuantity(cartCoffeeQuantity-1)
+        if(cartCoffeeQuantity > 1){
+            const newCoffeeQuantity = cartCoffeeQuantity-1
 
-            updateCoffeeCartQuantity(coffee.id, cartCoffeeQuantity)
+            setCartCoffeQuantity(newCoffeeQuantity)
+
+            updateCoffeeCartQuantity(coffee.id, newCoffeeQuantity)
         }
     }
 
@@ -70,7 +74,8 @@ export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
                 </div>
             </div>
 
-            <p className='price'>R$ {totalPrice.toFixed(2).toString().replace(".", ",")}</p>
+            {/* <p className='price'>R$ {totalPrice.toFixed(2).toString().replace(".", ",")}</p> */}
+            <p className='price'>R$ {coffee.price.toFixed(2).toString().replace(".", ",")}</p>
         </CartCoffeeCardContainer>
     )
 }

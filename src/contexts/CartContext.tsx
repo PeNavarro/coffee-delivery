@@ -34,7 +34,7 @@ export function CartContextProvider({children}: CartContextProviderProps){
 
     function addCoffeeToCart(coffeeToCart: CoffeeInCart){
         if(coffeeToCart.coffeeQuantity > 0){
-            setCoffeeCart([...coffeeCart, coffeeToCart])         
+            setCoffeeCart(coffeeCart => [...coffeeCart, coffeeToCart])         
         }
     }
 
