@@ -27,17 +27,21 @@ export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
 
     function handleIncreaseButton(){
         if(cartCoffeeQuantity < 99){
-            setCartCoffeQuantity(cartCoffeeQuantity+1)
+            const newCoffeeQuantity = cartCoffeeQuantity+1
 
-            updateCoffeeCartQuantity(coffee.id, cartCoffeeQuantity)
+            setCartCoffeQuantity(newCoffeeQuantity)
+
+            updateCoffeeCartQuantity(coffee.id, newCoffeeQuantity)
         }
     }
 
     function handleDecreaseButton(){
         if(cartCoffeeQuantity > 1){
-            setCartCoffeQuantity(cartCoffeeQuantity-1)
+            const newCoffeeQuantity = cartCoffeeQuantity-1
 
-            updateCoffeeCartQuantity(coffee.id, cartCoffeeQuantity)
+            setCartCoffeQuantity(newCoffeeQuantity)
+
+            updateCoffeeCartQuantity(coffee.id, newCoffeeQuantity)
         }
     }
 

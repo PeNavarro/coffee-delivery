@@ -27,7 +27,7 @@ export const CartData = styled.main`
     }
 `
 
-export const FormContainer = styled.div` 
+export const DeliveryData = styled.div` 
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -208,6 +208,12 @@ export const CartBox = styled.div`
 
         &:hover{
             background-color: ${props => props.theme['yellow-dark']};
+        }
+
+        &:disabled{
+            opacity: 0.6;
+            background-color: ${props => props.theme['yellow']};
+            cursor: not-allowed;
         }
     }
 `
