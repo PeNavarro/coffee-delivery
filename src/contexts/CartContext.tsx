@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { CoffeeInterface } from '../components/CoffeCard/index.tsx'
+import { FormData } from '../pages/Checkout/index.tsx'
 
 interface CoffeeInCart{
     coffee: CoffeeInterface,
@@ -8,9 +9,11 @@ interface CoffeeInCart{
 
 interface CartContext{
     coffeeCart: CoffeeInCart[],
+    orderData?: FormData,
     addCoffeeToCart: (coffee: CoffeeInCart) => void,
     updateCoffeeCartQuantity: (coffeeId: string, coffeeQuantity: number) => void,
-    removeCoffeeFromCart: (coffeeId: string) => void
+    removeCoffeeFromCart: (coffeeId: string) => void,
+    addOrderData: (orderData: FormData) => void
 }  
 
 interface CartContextProviderProps{
@@ -20,6 +23,14 @@ interface CartContextProviderProps{
 export const CartContext = createContext({} as CartContext)
 
 export function CartContextProvider({children}: CartContextProviderProps){
+    const [orderData, setOrderData] = useState<FormData>(() => {
+
+        if(localStorage.getItem('@coffee-delivery:order-data-1.0.0')){
+            return JSON.parse(localStorage.getItem('@coffee-delivery:order-data-1.0.0')!)
+        }
+        return
+    })
+
     const [ coffeeCart, setCoffeeCart ] = useState<CoffeeInCart[]>(() => {
 
         if(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')){
@@ -30,7 +41,10 @@ export function CartContextProvider({children}: CartContextProviderProps){
 
     useEffect(() => {
         localStorage.setItem('@coffee-delivery:coffee-cart-1.0.0', JSON.stringify(coffeeCart))
-    }, [coffeeCart])
+
+        if(orderData)
+            localStorage.setItem('@coffee-delivery:order-data-1.0.0', JSON.stringify(orderData))
+    }, [coffeeCart, orderData])
 
     function addCoffeeToCart(coffeeToCart: CoffeeInCart){
         if(coffeeToCart.coffeeQuantity > 0){
@@ -58,8 +72,12 @@ export function CartContextProvider({children}: CartContextProviderProps){
         setCoffeeCart(cartWithCoffeeRemoved)
     }
 
+    function addOrderData(orderData: FormData){
+        setOrderData(orderData)
+    }
+
     return(
-        <CartContext.Provider value={{coffeeCart, addCoffeeToCart, updateCoffeeCartQuantity, removeCoffeeFromCart}}>
+        <CartContext.Provider value={{coffeeCart, orderData, addCoffeeToCart, updateCoffeeCartQuantity, removeCoffeeFromCart, addOrderData}}>
             {children}
         </CartContext.Provider>
     )

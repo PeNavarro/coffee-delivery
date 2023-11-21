@@ -7,6 +7,12 @@ export const CheckoutContainer = styled.main`
 
     padding-top: 40px;
     padding-bottom: 240px;
+
+    .inputError{
+        font-size: 14px;
+        color: ${props => props.theme['error']};
+        display: block;
+    }
 `
 
 export const OrderData = styled.main` 
@@ -52,9 +58,18 @@ export const DeliveryData = styled.div`
         &:focus{
             border: 1px solid ${props => props.theme['yellow-dark']};
         }
-        
-        &:first-child{
-            max-width: 200px;
+    }
+
+    .inputWrapperWithHelperText{
+        display: flex;
+
+        .inputWithHelperText{
+            flex-grow: 1;
+            max-width: unset !important;
+        }
+
+        .inputWithHelperText:focus + .helperText{
+            border: 1px solid ${props => props.theme['yellow-dark']};
         }
     }
 
@@ -71,21 +86,34 @@ export const DeliveryData = styled.div`
         font-style: italic;
     }
 
+    .inputWrapper{
+        display: flex;
+        flex-direction: column;
+
+        &:first-child{
+            max-width: 200px;
+        }
+
+        &:not(:first-child){
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+    }
+
     .stateInput{
         flex-grow: 0;
         width: 60px;
     }
 
-    .inputWithHelperText:focus + .helperText{
-        border: 1px solid ${props => props.theme['yellow-dark']};
-    }
-
-    div{
+    .inputsInLine{
         display: flex;
         gap: 12px;
 
-        input{
-            flex-grow: 1;
+        &:last-child{
+            .inputWrapper:last-child{
+                flex-grow: 0;
+            }
         }
     }
 `
@@ -119,6 +147,7 @@ export const BoxContainer = styled.div`
 
 export const PaymentOptions = styled.div`
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
     
     label{
@@ -152,6 +181,10 @@ export const PaymentOptions = styled.div`
 
     input{
         display: none;
+    }
+
+    .paymentMethodError{
+        width: 100%;
     }
 `
 
