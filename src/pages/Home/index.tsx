@@ -12,9 +12,9 @@ export function Home(){
     useEffect(() => {
         if(!localStorage.getItem('@coffee-delivery:coffee-list-1.0.0')){
             localStorage.setItem('@coffee-delivery:coffee-list-1.0.0', JSON.stringify(coffeeListData))
+            setCoffeeList(JSON.parse(JSON.stringify(coffeeListData)))
         }else{
             const storedCoffeeList = localStorage.getItem('@coffee-delivery:coffee-list-1.0.0')
-
             setCoffeeList(JSON.parse(storedCoffeeList!))
         }
 
