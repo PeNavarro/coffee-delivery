@@ -27,13 +27,6 @@ export interface FormData{
 
 export function Checkout(){
     const { coffeeCart, addOrderData, setCityAndState } = useContext(CartContext)
-
-    const [ streetForm, setStreetForm ] = useState('')
-    const [ numberForm, setNumberForm ] = useState('')
-    const [ complementForm, setComplementForm ] = useState('')
-    const [ neighborhoodForm, setNeighborhoodForm ] = useState('')
-    const [ cityForm, setCityForm ] = useState('')
-    const [ stateForm, setStateForm ] = useState('')
     const [ totalCoffeesPrice, setTotalCoffeesPrice ] = useState(0)
     const [ deliveryTax, setDeliveryTax ] = useState(0)
 
@@ -137,7 +130,6 @@ export function Checkout(){
                                         id="street" 
                                         placeholder="Rua" 
                                         {...methods.register('street', {
-                                            onChange: (e: ChangeEvent<HTMLInputElement>) => setStreetForm(e.target.value), 
                                             required: 'Esse campo é obrigatório, preencha o CEP para completar automaticamente.',
                                         })}
                                         
@@ -153,9 +145,7 @@ export function Checkout(){
                                             type="text" 
                                             id="number" 
                                             placeholder="Número" 
-                                            value={numberForm} 
                                             {...methods.register('number', {
-                                                onChange: (e: ChangeEvent<HTMLInputElement>) => setNumberForm(e.target.value), 
                                                 pattern: {
                                                     value: /^[0-9]+$/,
                                                     message: 'Digite somente números!'
@@ -175,9 +165,7 @@ export function Checkout(){
                                                 type="text" 
                                                 id="complement" 
                                                 placeholder="Complemento" 
-                                                value={complementForm}
                                                 {...methods.register('complement', {
-                                                    onChange: (e: ChangeEvent<HTMLInputElement>) => setComplementForm(e.target.value), 
                                                 })}
                                             />
                                             <input 
@@ -185,7 +173,6 @@ export function Checkout(){
                                                 type="text" 
                                                 value="Opcional"
                                                 {...methods.register('helperText', {
-                                                    onChange: (e: ChangeEvent<HTMLInputElement>) => setComplementForm(e.target.value), 
                                                     disabled: true,
                                                 })}
                                             />
@@ -203,8 +190,7 @@ export function Checkout(){
                                             type="text" 
                                             id="neighborhood" 
                                             placeholder="Bairro"    
-                                            {...methods.register('neighborhood', {
-                                                onChange: (e: ChangeEvent<HTMLInputElement>) => setNeighborhoodForm(e.target.value), 
+                                            {...methods.register('neighborhood', { 
                                                 required: 'Esse campo é obrigatório',
                                             })}
                                         />
@@ -219,7 +205,6 @@ export function Checkout(){
                                             id="city" 
                                             placeholder="Cidade" 
                                             {...methods.register('city', {
-                                                onChange: (e: ChangeEvent<HTMLInputElement>) => setCityForm(e.target.value),
                                                 required: 'Esse campo é obrigatório',
                                             })}
                                         />
@@ -236,7 +221,6 @@ export function Checkout(){
                                             placeholder="UF" 
                                             maxLength={2}
                                             {...methods.register('state', {
-                                                onChange: (e: ChangeEvent<HTMLInputElement>) => setStateForm(e.target.value), 
                                                 maxLength: 2,
                                                 required: 'Esse campo é obrigatório',
                                             })}
