@@ -6,7 +6,7 @@ import { CartContext } from "../../contexts/CartContext"
 import { Link } from "react-router-dom"
 
 export function Header(){
-    const { coffeeCart } = useContext(CartContext)
+    const { coffeeCart, orderData } = useContext(CartContext)
 
     function countTotalCoffeesOnCart(){
         let totalCoffeeQuantity = 0;
@@ -17,7 +17,7 @@ export function Header(){
 
         return totalCoffeeQuantity
     }
-
+    
     return(
         <HeaderContainer>
             <Link to="/">
@@ -27,7 +27,9 @@ export function Header(){
             <nav>
                 <div className="location">
                     <MapPin width={22} weight="fill" color='#8047F8' />
-                    <span>Porto Alegre, RS</span>
+                    {orderData?.city && orderData?.state &&
+                        <span>{orderData.city}, {orderData.state}</span>
+                    }
                 </div>
 
                 <Link to="/checkout" className="cartLink">

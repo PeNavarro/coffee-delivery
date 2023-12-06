@@ -2,6 +2,7 @@ import { Minus, Plus } from '@phosphor-icons/react'
 import { CartCoffeeCardContainer } from './styles.ts'
 import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext.tsx'
+import { useFormContext } from 'react-hook-form'
 
 export interface CoffeeInterface{
     id: string,
@@ -18,12 +19,10 @@ export interface CoffeeCardInterface{
 }
 
 export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
+    const { register } = useFormContext();
     const { updateCoffeeCartQuantity, removeCoffeeFromCart } = useContext(CartContext)
     
     const [ cartCoffeeQuantity, setCartCoffeQuantity] = useState(coffeeQuantity)
-
-    // const totalPrice = coffee.price * cartCoffeeQuantity;
-
 
     function handleIncreaseButton(){
         if(cartCoffeeQuantity < 99){
@@ -58,11 +57,20 @@ export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
                     <h3>{coffee.name}</h3>
                     <div className="actions">
                         <div className="counter">
-                            <button onClick={handleDecreaseButton}>
+                            <button type='button' onClick={handleDecreaseButton}>
                                 <Minus weight='bold' width={14} fill='#8047F8'/>
                             </button>
-                            <input type="text" name="quantity" value={cartCoffeeQuantity} size={20} disabled readOnly/>
-                            <button onClick={handleIncreaseButton}>
+                            <input 
+                                type="text" 
+                                value={cartCoffeeQuantity} 
+                                size={20} 
+                                disabled 
+                                readOnly
+                                {...register('quantity', {
+                                    disabled: true,
+                                })}
+                            />
+                            <button type='button' onClick={handleIncreaseButton}>
                                 <Plus weight='bold' width={14} fill='#8047F8'/>
                             </button>
                         </div>
@@ -74,7 +82,6 @@ export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
                 </div>
             </div>
 
-            {/* <p className='price'>R$ {totalPrice.toFixed(2).toString().replace(".", ",")}</p> */}
             <p className='price'>R$ {coffee.price.toFixed(2).toString().replace(".", ",")}</p>
         </CartCoffeeCardContainer>
     )
