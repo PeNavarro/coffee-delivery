@@ -17,7 +17,7 @@ export function Header(){
 
         return totalCoffeeQuantity
     }
-
+    
     return(
         <HeaderContainer>
             <Link to="/">
@@ -27,7 +27,7 @@ export function Header(){
             <nav>
                 <div className="location">
                     <MapPin width={22} weight="fill" color='#8047F8' />
-                    {orderData && 
+                    {orderData?.city && orderData?.state &&
                         <span>{orderData.city}, {orderData.state}</span>
                     }
                 </div>

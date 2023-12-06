@@ -14,6 +14,7 @@ interface CartContext{
     updateCoffeeCartQuantity: (coffeeId: string, coffeeQuantity: number) => void,
     removeCoffeeFromCart: (coffeeId: string) => void,
     addOrderData: (orderData: FormData) => void
+    setCityAndState: (city: string, state: string) => void
 }  
 
 interface CartContextProviderProps{
@@ -76,8 +77,16 @@ export function CartContextProvider({children}: CartContextProviderProps){
         setOrderData(orderData)
     }
 
+    function setCityAndState(city: string, state: string){
+        if(city && state){
+            setOrderData({...orderData, city: city, state: state})
+        }else{
+            setOrderData({...orderData, city: '', state: ''})
+        }
+    }
+
     return(
-        <CartContext.Provider value={{coffeeCart, orderData, addCoffeeToCart, updateCoffeeCartQuantity, removeCoffeeFromCart, addOrderData}}>
+        <CartContext.Provider value={{coffeeCart, orderData, addCoffeeToCart, updateCoffeeCartQuantity, removeCoffeeFromCart, addOrderData, setCityAndState}}>
             {children}
         </CartContext.Provider>
     )
