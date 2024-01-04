@@ -17,9 +17,22 @@ export interface CoffeeCardInterface{
 }
 
 export function CoffeeCard({coffee}: CoffeeCardInterface){
-    const { addCoffeeToCart } = useContext(CartContext)
+    const { coffeeCart, addCoffeeToCart } = useContext(CartContext)
 
-    const [coffeeQuantity, setCoffeQuantity] = useState(0)
+    const [coffeeQuantity, setCoffeQuantity] = useState(() => {
+        if(coffeeCart.length > 0){
+            let coffeeAddedOnCart = coffeeCart.find(coffeeFromCart => coffeeFromCart.coffee.id === coffee.id)
+
+            if(coffeeAddedOnCart){
+                return coffeeAddedOnCart?.coffeeQuantity
+            }else{
+                return 0
+            }
+            
+        }else{
+            return 0
+        }
+    })
 
 
     function handleIncreaseButton(){
