@@ -7,7 +7,7 @@ export const coffeeListData = [
         "description": "O tradicional café feito com água quente e grãos moídos",
         "price": 9.90,
         "categories": ["Tradicional"],
-        "image": "src/assets/expresso-tradicional.png"
+        "image": "assets/expresso-tradicional.png"
     },
     {
         "id": uuidv4(),
@@ -15,7 +15,7 @@ export const coffeeListData = [
         "description": "Expresso diluído, menos intenso que o tradicional",
         "price": 9.90,
         "categories": ["Tradicional"],
-        "image": "src/assets/expresso-americano.png"
+        "image": "assets/expresso-americano.png"
     },
     {
         "id": uuidv4(),
@@ -23,7 +23,7 @@ export const coffeeListData = [
         "description": "Café expresso tradicional com espuma cremosa",
         "price": 9.90,
         "categories": ["Tradicional"],
-        "image": "src/assets/expresso-cremoso.png"
+        "image": "assets/expresso-cremoso.png"
     },
     {
         "id": uuidv4(),
@@ -31,7 +31,7 @@ export const coffeeListData = [
         "description": "Bebida preparada com café expresso e cubos de gelo",
         "price": 9.90,
         "categories": ["Tradicional", "gelado"],
-        "image": "src/assets/expresso-gelado.png"
+        "image": "assets/expresso-gelado.png"
     },
     {
         "id": uuidv4(),
@@ -39,7 +39,7 @@ export const coffeeListData = [
         "description": "Meio a meio de expresso tradicional com leite vaporizado",
         "price": 9.90,
         "categories": ["Tradicional", "com leite"],
-        "image": "src/assets/cafe-com-leite.png"
+        "image": "assets/cafe-com-leite.png"
     },
     {
         "id": uuidv4(),
@@ -47,7 +47,7 @@ export const coffeeListData = [
         "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
         "price": 9.90,
         "categories": ["Tradicional", "com leite"],
-        "image": "src/assets/latte.png"
+        "image": "assets/latte.png"
     },
     {
         "id": uuidv4(),
@@ -55,7 +55,7 @@ export const coffeeListData = [
         "description": "Bebida com canela feita de doses iguais de café, leite e espuma",
         "price": 9.90,
         "categories": ["Tradicional", "com leite"],
-        "image": "src/assets/capuccino.png"
+        "image": "assets/capuccino.png"
     },
     {
         "id": uuidv4(),
@@ -63,7 +63,7 @@ export const coffeeListData = [
         "description": "Café expresso misturado com um pouco de leite quente e espuma",
         "price": 9.90,
         "categories": ["Tradicional", "com leite"],
-        "image": "src/assets/macchiato.png"
+        "image": "assets/macchiato.png"
     },
     {
         "id": uuidv4(),
@@ -71,7 +71,7 @@ export const coffeeListData = [
         "description": "Café expresso com calda de chocolate, pouco leite e espuma",
         "price": 9.90,
         "categories": ["Tradicional", "com leite"],
-        "image": "src/assets/mocaccino.png"
+        "image": "assets/mocaccino.png"
     },
     {
         "id": uuidv4(),
@@ -79,7 +79,7 @@ export const coffeeListData = [
         "description": "Bebida feita com chocolate dissolvido no leite quente e café",
         "price": 9.90,
         "categories": ["Tradicional", "com leite"],
-        "image": "src/assets/chocolate-quente.png"
+        "image": "assets/chocolate-quente.png"
     },
     {
         "id": uuidv4(),
@@ -87,7 +87,7 @@ export const coffeeListData = [
         "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
         "price": 9.90,
         "categories": ["especial", "alcoólico", "gelado"],
-        "image": "src/assets/cubano.png"
+        "image": "assets/cubano.png"
     },
     {
         "id": uuidv4(),
@@ -95,7 +95,7 @@ export const coffeeListData = [
         "description": "Bebida adocicada preparada com café e leite de coco",
         "price": 9.90,
         "categories": ["especial"],
-        "image": "src/assets/havaiano.png"
+        "image": "assets/havaiano.png"
     },
     {
         "id": uuidv4(),
@@ -103,7 +103,7 @@ export const coffeeListData = [
         "description": "Bebida preparada com grãos de café árabe e especiarias",
         "price": 9.90,
         "categories": ["especial"],
-        "image": "src/assets/arabe.png"
+        "image": "assets/arabe.png"
     },
     {
         "id": uuidv4(),
@@ -111,6 +111,6 @@ export const coffeeListData = [
         "description": "Bebida a base de café, uísque irlandês, açúcar e chantilly",
         "price": 9.90,
         "categories": ["especial", "alcoólico"],
-        "image": "src/assets/irlandes.png"
+        "image": "assets/irlandes.png"
     }
 ]
