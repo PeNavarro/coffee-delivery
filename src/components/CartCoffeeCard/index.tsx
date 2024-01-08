@@ -51,7 +51,7 @@ export function CartCoffeeCard({coffee, coffeeQuantity}: CoffeeCardInterface){
     return(
         <CartCoffeeCardContainer>
             <div className='coffeeData'>
-                <img src={coffee.image} alt={`Imagem café ${name}`} />
+                <img src={`src/${coffee.image}`} alt={`Imagem café ${name}`} />
 
                 <div>
                     <h3>{coffee.name}</h3>

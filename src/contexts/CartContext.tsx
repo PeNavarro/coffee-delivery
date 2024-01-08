@@ -1,8 +1,10 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useReducer } from "react";
 import { CoffeeInterface } from '../components/CoffeCard/index.tsx'
 import { FormData } from '../pages/Checkout/index.tsx'
+import { OrderDataReducer, OrderDataActionTypes } from "../reducers/orderDataReducer.ts";
+import { CoffeeCartReducer, CoffeeCartActionTypes } from "../reducers/coffeeCartReducer.ts";
 
-interface CoffeeInCart{
+export interface CoffeeInCart{
     coffee: CoffeeInterface,
     coffeeQuantity: number
 }
@@ -24,21 +26,19 @@ interface CartContextProviderProps{
 export const CartContext = createContext({} as CartContext)
 
 export function CartContextProvider({children}: CartContextProviderProps){
-    const [orderData, setOrderData] = useState<FormData>(() => {
-
+    const [orderData, dispatchOrderData] = useReducer(OrderDataReducer, () => {
         if(localStorage.getItem('@coffee-delivery:order-data-1.0.0')){
             return JSON.parse(localStorage.getItem('@coffee-delivery:order-data-1.0.0')!)
         }
         return
-    })
+    });
 
-    const [ coffeeCart, setCoffeeCart ] = useState<CoffeeInCart[]>(() => {
-
+    const [ coffeeCart, dispatchCoffeeCart ] = useReducer(CoffeeCartReducer, [], () => {
         if(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')){
-            return JSON.parse(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')!)
+            return JSON.parse(localStorage.getItem('@coffee-delivery:coffee-cart-1.0.0')!) as CoffeeInCart[];
         }
-        return []
-    })
+        return [];
+    });
 
     useEffect(() => {
         localStorage.setItem('@coffee-delivery:coffee-cart-1.0.0', JSON.stringify(coffeeCart))
@@ -49,39 +49,48 @@ export function CartContextProvider({children}: CartContextProviderProps){
 
     function addCoffeeToCart(coffeeToCart: CoffeeInCart){
         if(coffeeToCart.coffeeQuantity > 0){
-            setCoffeeCart(coffeeCart => [...coffeeCart, coffeeToCart])         
+            dispatchCoffeeCart({
+                type: CoffeeCartActionTypes.ADD_COFFEE_TO_CART,
+                payload: coffeeToCart
+            })       
         }
+        
     }
 
     function updateCoffeeCartQuantity(coffeeId: string, newCoffeeQuantity: number){
         if(newCoffeeQuantity > 0){
-            const cartWithQuantityChanged = coffeeCart.map(coffee => {
-                if(coffeeId === coffee.coffee.id){
-                    return {...coffee, coffeeQuantity: newCoffeeQuantity}
-                }
-
-                return coffee
-            })
-
-            setCoffeeCart(cartWithQuantityChanged)
+            dispatchCoffeeCart({
+                type: CoffeeCartActionTypes.UPDATE_COFFEE_QUANTITY,
+                payload: {coffeeId: coffeeId, newCoffeeQuantity: newCoffeeQuantity}
+            })   
         }
     }
 
     function removeCoffeeFromCart(coffeeId: string){
-        const cartWithCoffeeRemoved = coffeeCart.filter((coffee) => coffee.coffee.id !== coffeeId)
-
-        setCoffeeCart(cartWithCoffeeRemoved)
+        dispatchCoffeeCart({
+            type: CoffeeCartActionTypes.REMOVE_COFFEE_FROM_CART,
+            payload: {coffeeId: coffeeId}
+        }) 
     }
 
     function addOrderData(orderData: FormData){
-        setOrderData(orderData)
+        dispatchOrderData({
+            type: OrderDataActionTypes.ADD_ORDER_DATA,
+            payload: orderData
+        })
     }
 
     function setCityAndState(city: string, state: string){
         if(city && state){
-            setOrderData({...orderData, city: city, state: state})
+            dispatchOrderData({
+                type: OrderDataActionTypes.SET_CITY_AND_STATE,
+                payload: {city: city, state: state}
+            })
         }else{
-            setOrderData({...orderData, city: '', state: ''})
+            dispatchOrderData({
+                type: OrderDataActionTypes.SET_CITY_AND_STATE,
+                payload: {city: '', state: ''}
+            })
         }
     }
 

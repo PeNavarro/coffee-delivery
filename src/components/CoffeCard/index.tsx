@@ -17,9 +17,22 @@ export interface CoffeeCardInterface{
 }
 
 export function CoffeeCard({coffee}: CoffeeCardInterface){
-    const { addCoffeeToCart } = useContext(CartContext)
+    const { coffeeCart, addCoffeeToCart } = useContext(CartContext)
 
-    const [coffeeQuantity, setCoffeQuantity] = useState(0)
+    const [coffeeQuantity, setCoffeQuantity] = useState(() => {
+        if(coffeeCart.length > 0){
+            let coffeeAddedOnCart = coffeeCart.find(coffeeFromCart => coffeeFromCart.coffee.id === coffee.id)
+
+            if(coffeeAddedOnCart){
+                return coffeeAddedOnCart?.coffeeQuantity
+            }else{
+                return 0
+            }
+            
+        }else{
+            return 0
+        }
+    })
 
 
     function handleIncreaseButton(){
@@ -45,7 +58,7 @@ export function CoffeeCard({coffee}: CoffeeCardInterface){
 
     return(
         <CoffeeCardContainer>
-            <img src={coffee.image} alt={`Imagem café ${name}`} />
+            <img src={`src/${coffee.image}`} alt={`Imagem café ${name}`} />
             <div className="categories">
                 {coffee.categories.map((category) => {
                     return(
