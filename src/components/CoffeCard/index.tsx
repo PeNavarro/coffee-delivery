@@ -58,7 +58,7 @@ export function CoffeeCard({coffee}: CoffeeCardInterface){
 
     return(
         <CoffeeCardContainer>
-            <img src={coffee.image} alt={`Imagem café ${name}`} />
+            <img src={`src/${coffee.image}`} alt={`Imagem café ${name}`} />
             <div className="categories">
                 {coffee.categories.map((category) => {
                     return(
