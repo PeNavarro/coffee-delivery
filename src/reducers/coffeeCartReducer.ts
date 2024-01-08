@@ -23,14 +23,13 @@ export function CoffeeCartReducer(state: CoffeeInCart[], action: any) {
             }
 
         case CoffeeCartActionTypes.UPDATE_COFFEE_QUANTITY:
-            var teste = state.map((coffee: CoffeeInCart) => {
+            return state.map((coffee: CoffeeInCart) => {
                 if(coffee.coffee.id === action.payload.coffeeId){
                     return {...coffee, coffeeQuantity: action.payload.newCoffeeQuantity}
                 }
-            })
-            console.log(teste)
 
-            return teste
+                return {...coffee}
+            })
         
         case CoffeeCartActionTypes.REMOVE_COFFEE_FROM_CART:
             return state.filter((coffee) => coffee.coffee.id !== action.payload.coffeeId)
