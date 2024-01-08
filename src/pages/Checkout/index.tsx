@@ -27,6 +27,7 @@ export interface FormData{
 
 export function Checkout(){
     const { coffeeCart, addOrderData, setCityAndState } = useContext(CartContext)
+
     const [ totalCoffeesPrice, setTotalCoffeesPrice ] = useState(0)
     const [ deliveryTax, setDeliveryTax ] = useState(0)
 
@@ -74,6 +75,7 @@ export function Checkout(){
     }
 
     function handleSendOrder(formData: FormData){
+        console.log(formData)
         if(Object.keys(methods.formState.errors).length === 0){
             addOrderData(formData)
             navigate('/success');

@@ -1,5 +1,5 @@
 import { HeaderContainer } from "./styles"
-import logo from '../../../src/assets/Logo.svg'
+import logo from '../../assets/Logo.svg'
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { useContext } from "react"
 import { CartContext } from "../../contexts/CartContext"
