@@ -1,6 +1,6 @@
 # Resumo Técnico da Aplicação Coffee Delivery
 
-A aplicação **Coffee Delivery** é uma plataforma web desenvolvida para facilitar a compra e entrega de café. Utilizando tecnologias modernas como React.js e Tailwind CSS, a aplicação oferece uma experiência intuitiva e responsiva aos usuários.
+A aplicação **Coffee Delivery** é uma plataforma web desenvolvida para facilitar a compra e entrega de café. A aplicação busca oferecer uma experiência intuitiva e responsiva aos usuários.
 
 ## Funcionalidades Principais
 - **Catálogo de Produtos**: Apresenta uma variedade de opções de café, incluindo descrições, preços e imagens dos produtos disponíveis.
@@ -11,7 +11,7 @@ A aplicação **Coffee Delivery** é uma plataforma web desenvolvida para facili
 ## Tecnologias Utilizadas
 - **React.js**: Biblioteca JavaScript para construção de interfaces de usuário.
 - **Next.js**: Framework React para renderização do lado do servidor (SSR) e geração de páginas estáticas.
-- **Tailwind CSS**: Framework CSS utilitário para criação de estilos com base em classes.
+- **Styled Components**: Framework CSS utilitário para criação de estilos com base em componentes.
 - **Context API**: Utilizada para gerenciamento de estado da aplicação, permitindo o compartilhamento de dados entre componentes.
 
 ## Como Executar Localmente
