@@ -1,27 +1,24 @@
-# React + TypeScript + Vite
+# Resumo Técnico da Aplicação Coffee Delivery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A aplicação **Coffee Delivery** é uma plataforma web desenvolvida para facilitar a compra e entrega de café. Utilizando tecnologias modernas como React.js e Tailwind CSS, a aplicação oferece uma experiência intuitiva e responsiva aos usuários.
 
-Currently, two official plugins are available:
+## Funcionalidades Principais
+- **Catálogo de Produtos**: Apresenta uma variedade de opções de café, incluindo descrições, preços e imagens dos produtos disponíveis.
+- **Adição ao Carrinho**: Permite aos usuários adicionar produtos desejados ao carrinho de compras com apenas um clique.
+- **Finalização da Compra**: Facilita o processo de finalização da compra, fornecendo um formulário simples para inserção de informações de pagamento e entrega.
+- **Rastreamento de Pedidos**: Após a finalização da compra, os usuários podem acompanhar o status de entrega de seus pedidos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias Utilizadas
+- **React.js**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Next.js**: Framework React para renderização do lado do servidor (SSR) e geração de páginas estáticas.
+- **Tailwind CSS**: Framework CSS utilitário para criação de estilos com base em classes.
+- **Context API**: Utilizada para gerenciamento de estado da aplicação, permitindo o compartilhamento de dados entre componentes.
 
-## Expanding the ESLint configuration
+## Como Executar Localmente
+Para executar a aplicação localmente, siga os passos abaixo:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone este repositório: `git clone https://github.com/seu-usuario/coffee-delivery.git`
+2. Navegue até o diretório do projeto: `cd coffee-delivery`
+3. Instale as dependências: `npm install`
+4. Execute a aplicação: `npm run dev`
+5. Acesse a aplicação em seu navegador: `http://localhost:3000`
